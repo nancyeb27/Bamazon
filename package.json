@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/nancyeb27/Bamazon/issues"
   },
-  "homepage": "https://github.com/nancyeb27/Bamazon#readme"
+  "homepage": "https://github.com/nancyeb27/Bamazon#readme",
+  "dependencies": {
+    "inquirer": "^6.2.1"
+  }
 }

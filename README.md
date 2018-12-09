@@ -1,1 +1,1 @@
-# Bamazon
+Creating an Amazon-like storefront with MySQL skills. The app takes in orders from customers and depletes stock from the store's inventory. 
