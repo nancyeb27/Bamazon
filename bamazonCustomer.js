@@ -35,6 +35,7 @@ function showItemList() {
                         choices.push(res[i].item_id + ": " + res[i].product_name + " $" + res[i].price);
                     }
                     return choices;
+                    
                 }
             },
 
@@ -46,6 +47,7 @@ function showItemList() {
                     return answers.productId;
                 }
             }
+            
         ]).then(function (answers) {
             var splitSelectedItem = answers.productId.split(":");
             var selectedItem = splitSelectedItem[0];
@@ -61,13 +63,13 @@ function showItemList() {
                 if (error) throw error;
                 stockQuantity = parseInt(res[0].stock_quantity);
                 newProdQuant = stockQuantity - productQuantity;
-                productPrice = parseInt(res[0].price);
+                productPrice = parseFloat(res[0].price);
                 total = productQuantity * productPrice;
 
                 // console.log(stockQuantity);
                 // console.log(newProdQuant);
                 // console.log(productPrice);
-                // console.log(total);
+                //  console.log(total);
 
                 if (stockQuantity >= productQuantity) {
                     console.log("Successfully added to your cart!");
@@ -88,7 +90,6 @@ function showItemList() {
         });
     });
 }
-showItemList();
 
 function purchaseMore(total) {
     inquirer.prompt([{
