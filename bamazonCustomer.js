@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var console_table = require("console.table");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -35,7 +36,8 @@ function showItemList() {
                         choices.push(res[i].item_id + ": " + res[i].product_name + " $" + res[i].price);
                     }
                     return choices;
-                    
+                   
+
                 }
             },
 
@@ -47,11 +49,12 @@ function showItemList() {
                     return answers.productId;
                 }
             }
-            
+
         ]).then(function (answers) {
             var splitSelectedItem = answers.productId.split(":");
             var selectedItem = splitSelectedItem[0];
             var productQuantity = parseInt(answers.productQuant);
+
             var total;
             var stockQuantity;
             var newProdQuant;
@@ -70,38 +73,48 @@ function showItemList() {
                 // console.log(newProdQuant);
                 // console.log(productPrice);
                 //  console.log(total);
+                //  console.log(selectedItem);
 
                 if (stockQuantity >= productQuantity) {
+                    console.log("--------------------------------");
                     console.log("Successfully added to your cart!");
-                    connection.query(
-                        "UPDATE products SET ? WHERE ?", [{
-                            stock_quantity: newProdQuant
-                        }, {
-                            item_id: selectedItem
-                        }],
-                        function (error) {
-                            if (error) throw error;
-                        });
+                    console.log("Your total for this purchase is: $" + total);
+                    console.log("--------------------------------");
+                  
+
+            connection.query("UPDATE products SET ? WHERE ?", 
+            [{
+                stock_quantity: newProdQuant
+            }, {
+                item_id: selectedItem
+            }],
+                function (error) {
+                if (error) throw error;
+            });
                 } else {
+                    console.log("--------------------------------");
                     console.log("There are not enough products in storage. Try back later!")
                 }
                 purchaseMore(total);
+                
             });
         });
     });
 }
 
-function purchaseMore(total) {
-    inquirer.prompt([{
-        name: "addMoreItems",
-        type: "list",
-        message: "Do you want to purchase another item?",
-        choices: ["Yes", "No"]
+            function purchaseMore(total) {
+            inquirer.prompt([{
+            name: "addMoreItems",
+            type: "list",
+            message: "Do you want to purchase another item?",
+            choices: ["Yes", "No"]
     }]).then(function (answers) {
         if (answers.addMoreItems === "Yes") {
             showItemList();
         } else {
-            console.log("You're total comes to: $" + total);
+            console.log("--------------------------------");
+            console.log("Thank you for your order, please visit us again soon!")
+            
         }
     });
 }

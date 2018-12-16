@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/nancyeb27/Bamazon#readme",
   "dependencies": {
-    "inquirer": "^6.2.1"
+    "console.table": "^0.10.0",
+    "inquirer": "^6.2.1",
+    "mysql": "^2.16.0"
   }
 }
