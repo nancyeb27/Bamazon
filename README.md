@@ -19,7 +19,9 @@ The customer will then be asked if they would like to make another purchase, if 
 
 If the response is NO, the customer will thanked and asked to come back soon.
 
+To see how this app works, please view the following YouTube link:
 
+https://youtu.be/YcKbPWf62Qw
 
 This app uses:
 MySql
